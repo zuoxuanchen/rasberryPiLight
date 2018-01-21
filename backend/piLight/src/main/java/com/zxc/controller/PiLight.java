@@ -3,6 +3,7 @@ package com.zxc.controller;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
@@ -11,19 +12,33 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.zxc.service.inf.GpioService;
+import com.zxc.service.inf.SpiderService;
 import com.zxc.view.PortVo;
 
 @SpringBootConfiguration
 @RestController
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.zxc"})
+@MapperScan("com.zxc.mapper")
 public class PiLight {
 	
 	@Autowired
 	private GpioService gpioService;
+	
+	@Autowired
+	private SpiderService spiderService;
 
 	private static Logger logger = Logger.getLogger(PiLight.class);  
 	
+    @RequestMapping("/spider")
+    public String spider() {
+    	String url = "http://www.hanfan.cc/tag/runningman/";
+    	spiderService.getHanfan(url);
+    	url = "http://www.hanfan.cc/tag/challenge/";
+    	spiderService.getHanfan(url);
+        return "Spider done!";
+    }
+    
     @RequestMapping("/")
     public String greeting() {
         return "Hello World!";
