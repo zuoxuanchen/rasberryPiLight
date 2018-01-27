@@ -1,5 +1,6 @@
 package com.zxc.service.impl;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,12 +35,13 @@ public class AlarmClockServiceImpl implements AlarmClockService{
 	public static final String APP_ID = "10750488";
     public static final String API_KEY = "pxp2chcjRxbX2YWrQuRffjw0";
     public static final String SECRET_KEY = "761b306676f5861a1aa4aa0eb0c6aed2";
-    public static final String filePath = "D:\\tempSound\\";
-    //public static final String filePath = "/home/pi/java/tempSound/";
+    public static final String filePath = "D:\\tempSound\\";public static final String musicPath = "D:\\tempMusic\\";
+    //public static final String filePath = "/home/pi/java/tempSound/";public static final String musicPath = "/home/pi/java/tempMusic/";
     
 	@Autowired
 	private WeatherService weatherService;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private NewsService newsService;
 	
@@ -124,9 +126,24 @@ public class AlarmClockServiceImpl implements AlarmClockService{
         if (res1 != null) {
             System.out.println(res1.toString(2));
         }
+        this.playRandomMusic();
         this.play(filePath+filename);
 
         			
+	}
+
+	/**
+	 * 
+	 */
+	private void playRandomMusic() {
+		File file = new File(musicPath);
+		java.util.Random random=new java.util.Random();// 定义随机类
+		int result=random.nextInt(1000);// 返回[0,1000)集合中的整数
+		if (file.exists()) {
+			File[] files = file.listFiles();
+			result %= files.length;
+			this.play(files[result].getAbsolutePath());
+		}
 	}
 
 	/**
@@ -139,7 +156,7 @@ public class AlarmClockServiceImpl implements AlarmClockService{
 			public void run(){
 				try {
 					InputStream input = new FileInputStream(fileName);
-					Player player = new Player(input );
+					Player player = new Player(input);
 					player.play();
 				} catch (Exception e) {
 					e.printStackTrace();

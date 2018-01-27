@@ -3,7 +3,6 @@ package com.zxc.controller;
 import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zxc.service.inf.AlarmClockService;
 import com.zxc.service.inf.GpioService;
-import com.zxc.service.inf.NewsService;
 import com.zxc.service.inf.SpiderService;
-import com.zxc.service.inf.WeatherService;
 import com.zxc.view.PortVo;
 
 @SpringBootConfiguration
