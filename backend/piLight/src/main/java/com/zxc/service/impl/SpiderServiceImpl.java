@@ -23,7 +23,8 @@ public class SpiderServiceImpl implements SpiderService{
 	private ProgramTableService programTableService;
 	
 	@Override
-	public void getHanfan(String url) {
+	public int getHanfan(String url) {
+		int cnt = 0;
 		Document doc = getDoc(url);
 		Elements elements = doc.getElementsByTag("a");
 		for (Element element :elements) {
@@ -46,12 +47,14 @@ public class SpiderServiceImpl implements SpiderService{
 					program.seteNum(textsWithContent.get(3));
 					program.setHanfanUrl(linkHref);
 					if (programTableService.exist(program)) {
-						return;
+						return cnt;
 					}
 					getBaiduUrlThenInsert(program);
+					cnt++;
 				}
 			}
 		}
+		return cnt;
 	}
 	
 	private void getBaiduUrlThenInsert(Program program) {	
@@ -77,7 +80,7 @@ public class SpiderServiceImpl implements SpiderService{
 		programTableService.insertProgram(program);
 	}
 
-	private Document getDoc(String url){
+	public Document getDoc(String url){
 		Document document = null;
 		try {
 			document = Jsoup.connect(url).header("Accept", "*/*")

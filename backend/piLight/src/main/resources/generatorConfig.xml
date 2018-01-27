@@ -49,6 +49,13 @@
 			如果想要mapper配置文件加入sql的where条件查询, 可以将enableCountByExample等设为true,
 			这样就会生成一个对应domainObjectName的Example类, enableCountByExample等设为false时,
 			就不会生成对应的Example类了. -->
-	        <table tableName="t_program" domainObjectName="Program" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+<!-- 	        <table tableName="t_program" domainObjectName="Program" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+	        <table tableName="t_nick_name" domainObjectName="NickName" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+	        <table tableName="t_work_day" domainObjectName="WorkDay" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+	        <table tableName="t_weather" domainObjectName="Weather" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+	        <table tableName="t_hints" domainObjectName="Hints" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+	        <table tableName="t_news" domainObjectName="News" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false" >  </table>  
+ -->
+
    </context>  
 </generatorConfiguration> 

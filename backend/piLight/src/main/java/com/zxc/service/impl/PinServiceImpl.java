@@ -1,6 +1,5 @@
 package com.zxc.service.impl;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.pi4j.io.gpio.GpioController;

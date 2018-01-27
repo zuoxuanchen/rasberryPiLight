@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxc.mapper.HintsMapper" >
+  <resultMap id="BaseResultMap" type="com.zxc.model.Hints" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="old_year" property="oldYear" jdbcType="INTEGER" />
+    <result column="old_month" property="oldMonth" jdbcType="INTEGER" />
+    <result column="old_day" property="oldDay" jdbcType="INTEGER" />
+    <result column="schedule_day" property="scheduleDay" jdbcType="INTEGER" />
+    <result column="birth_name" property="birthName" jdbcType="VARCHAR" />
+    <result column="hints" property="hints" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, year, month, day, old_year, old_month, old_day, schedule_day, birth_name, hints
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zxc.model.HintsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_hints
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hints
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_hints
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zxc.model.Hints" >
+    insert into t_hints (id, year, month, 
+      day, old_year, old_month, 
+      old_day, schedule_day, birth_name, 
+      hints)
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
+      #{day,jdbcType=INTEGER}, #{oldYear,jdbcType=INTEGER}, #{oldMonth,jdbcType=INTEGER}, 
+      #{oldDay,jdbcType=INTEGER}, #{scheduleDay,jdbcType=INTEGER}, #{birthName,jdbcType=VARCHAR}, 
+      #{hints,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxc.model.Hints" >
+    insert into t_hints
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="oldYear != null" >
+        old_year,
+      </if>
+      <if test="oldMonth != null" >
+        old_month,
+      </if>
+      <if test="oldDay != null" >
+        old_day,
+      </if>
+      <if test="scheduleDay != null" >
+        schedule_day,
+      </if>
+      <if test="birthName != null" >
+        birth_name,
+      </if>
+      <if test="hints != null" >
+        hints,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="oldYear != null" >
+        #{oldYear,jdbcType=INTEGER},
+      </if>
+      <if test="oldMonth != null" >
+        #{oldMonth,jdbcType=INTEGER},
+      </if>
+      <if test="oldDay != null" >
+        #{oldDay,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleDay != null" >
+        #{scheduleDay,jdbcType=INTEGER},
+      </if>
+      <if test="birthName != null" >
+        #{birthName,jdbcType=VARCHAR},
+      </if>
+      <if test="hints != null" >
+        #{hints,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zxc.model.HintsExample" resultType="java.lang.Integer" >
+    select count(*) from t_hints
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxc.model.Hints" >
+    update t_hints
+    <set >
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="oldYear != null" >
+        old_year = #{oldYear,jdbcType=INTEGER},
+      </if>
+      <if test="oldMonth != null" >
+        old_month = #{oldMonth,jdbcType=INTEGER},
+      </if>
+      <if test="oldDay != null" >
+        old_day = #{oldDay,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleDay != null" >
+        schedule_day = #{scheduleDay,jdbcType=INTEGER},
+      </if>
+      <if test="birthName != null" >
+        birth_name = #{birthName,jdbcType=VARCHAR},
+      </if>
+      <if test="hints != null" >
+        hints = #{hints,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxc.model.Hints" >
+    update t_hints
+    set year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      day = #{day,jdbcType=INTEGER},
+      old_year = #{oldYear,jdbcType=INTEGER},
+      old_month = #{oldMonth,jdbcType=INTEGER},
+      old_day = #{oldDay,jdbcType=INTEGER},
+      schedule_day = #{scheduleDay,jdbcType=INTEGER},
+      birth_name = #{birthName,jdbcType=VARCHAR},
+      hints = #{hints,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <select id="findAllHints" resultMap="BaseResultMap" parameterType="com.zxc.model.Hints" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hints where
+    (
+    	(year = #{year,jdbcType=INTEGER} or year = -1) 
+    	and (month = #{month,jdbcType=INTEGER} or month = -1) 
+    	and (day = #{day,jdbcType=INTEGER} or day = -1) 
+    )
+    or
+        (
+    	(old_year = #{oldYear,jdbcType=INTEGER} or old_year = -1) 
+    	and (old_month = #{oldMonth,jdbcType=INTEGER} or old_month = -1) 
+    	and (old_day = #{oldDay,jdbcType=INTEGER} or old_day = -1) 
+    )
+  </select>
+  
+</mapper>

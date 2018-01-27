@@ -1,10 +1,8 @@
 package com.zxc.service.impl;
 
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
